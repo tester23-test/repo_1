@@ -1,3 +1,4 @@
+```lua
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local rootPart = character:WaitForChild("HumanoidRootPart")
@@ -55,7 +56,6 @@ exitButton.Text = "X"
 exitButton.Parent = frame
 
 button1.MouseButton1Click:Connect(function()
-
 	character = player.Character or player.CharacterAdded:Wait()
 	rootPart = character:WaitForChild("HumanoidRootPart")
 
@@ -67,11 +67,9 @@ button1.MouseButton1Click:Connect(function()
 		position1.Y,
 		position1.Z
 	)
-
 end)
 
 button2.MouseButton1Click:Connect(function()
-
 	character = player.Character or player.CharacterAdded:Wait()
 	rootPart = character:WaitForChild("HumanoidRootPart")
 
@@ -83,26 +81,28 @@ button2.MouseButton1Click:Connect(function()
 		position2.Y,
 		position2.Z
 	)
-
 end)
 
 button3.MouseButton1Click:Connect(function()
-
 	character = player.Character or player.CharacterAdded:Wait()
 	rootPart = character:WaitForChild("HumanoidRootPart")
 
-	for move = 0, 10, 0.05 do
+	if position1 then
+		while (rootPart.Position - position1).Magnitude > 0.1 do
+			local direction = position1 - rootPart.Position
+			local distance = direction.Magnitude
+			local speed = 0.5
 
-		rootPart.CFrame = rootPart.CFrame + rootPart.CFrame.LookVector * 0.05
+			rootPart.CFrame = rootPart.CFrame + direction.Unit * math.min(speed, distance)
 
-		task.wait()
+			task.wait()
+		end
 
+		rootPart.CFrame = CFrame.new(position1)
 	end
-
 end)
 
 exitButton.MouseButton1Click:Connect(function()
-
 	gui:Destroy()
-
 end)
+```
