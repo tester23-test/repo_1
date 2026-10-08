@@ -1,4 +1,3 @@
-```lua
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local rootPart = character:WaitForChild("HumanoidRootPart")
@@ -105,4 +104,3 @@ end)
 exitButton.MouseButton1Click:Connect(function()
 	gui:Destroy()
 end)
-```
